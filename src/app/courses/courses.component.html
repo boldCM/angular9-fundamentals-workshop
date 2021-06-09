@@ -34,15 +34,41 @@
       <mat-card-header>
         <mat-card-title> Selected Course </mat-card-title>
       </mat-card-header>
-      <form>
+      <form #form="ngForm" (submit)="saveCourse(selectedCourse.id)">
         <mat-card-content>
-          {{ selectedCourse | json }}
-          <!-- COURSE FORM -->
+          <mat-form-field>
+            <input
+              matInput
+              required
+              placeholder="Title"
+              type="text"
+              name="title"
+              [(ngModel)]="selectedCourse.title"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Description"
+              type="text"
+              name="description"
+              [(ngModel)]="selectedCourse.description"
+            />
+          </mat-form-field>
         </mat-card-content>
+        <mat-card-actions>
+          <!-- COURSE ACTIONS -->
+          <button
+            type="submit"
+            [disabled]="form.invalid"
+            mat-button
+            color="primary"
+          >
+            Save
+          </button>
+          <button type="button" mat-button (click)="cancel()">Cancel</button>
+        </mat-card-actions>
       </form>
-      <mat-card-actions>
-        <!-- COURSE ACTIONS -->
-      </mat-card-actions>
     </mat-card>
   </div>
 </div>

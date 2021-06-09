@@ -11,7 +11,7 @@ export class CoursesComponent implements OnInit {
   // STEP 02: Add event handler to select course
   // STEP 03: Display raw json of selected course
 
-  public selectedCourse: string = null;
+  public selectedCourse = null;
 
   courses = [
     {
@@ -53,9 +53,25 @@ export class CoursesComponent implements OnInit {
     this.selectedCourse = course;
   }
 
+  saveCourse(courseId): void {
+    console.log(courseId, 'saved!');
+  }
+
   deleteCourse(courseId): void {
     console.log(courseId);
     this.courses.splice(this.courses.indexOf(courseId), 1);
     console.log(this.courses.splice(this.courses.indexOf(courseId), 1));
+  }
+
+  cancel(): void {
+    console.log('canceled');
+    const emptyCourse = {
+      id: null,
+      title: '',
+      description: '',
+      percentComplete: 0,
+      favorite: false,
+    };
+    this.selectedCourse = emptyCourse;
   }
 }
