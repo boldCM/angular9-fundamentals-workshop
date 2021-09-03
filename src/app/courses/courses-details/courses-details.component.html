@@ -1,13 +1,13 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      <span *ngIf="selectedCourse.id; else noSelection">{{
-        selectedCourse.title
+      <span *ngIf="changeCourse.id; else noSelection">{{
+        changeCourse.title
       }}</span>
       <ng-template #noSelection>Select Course</ng-template>
     </mat-card-title>
   </mat-card-header>
-  <form #form="ngForm" (submit)="saveCourse.emit(selectedCourse)">
+  <form #form="ngForm" (submit)="saveCourse.emit(changeCourse)">
     <mat-card-content>
       <mat-form-field>
         <input
@@ -16,7 +16,7 @@
           type="text"
           name="title"
           required
-          [(ngModel)]="selectedCourse.title"
+          [(ngModel)]="changeCourse.title"
         />
       </mat-form-field>
       <mat-form-field>
@@ -25,25 +25,25 @@
           placeholder="Description"
           type="text"
           name="description"
-          [(ngModel)]="selectedCourse.description"
+          [(ngModel)]="changeCourse.description"
         />
       </mat-form-field>
       <section>
-        <h4>{{ selectedCourse.percentComplete }}% Complete</h4>
+        <h4>{{ changeCourse.percentComplete }}% Complete</h4>
         <mat-slider
           class="full-width"
           min="0"
           max="100"
           name="percentComplete"
           thumbLabel
-          [(ngModel)]="selectedCourse.percentComplete"
+          [(ngModel)]="changeCourse.percentComplete"
         >
         </mat-slider>
       </section>
       <section></section>
       <mat-checkbox
         name="favorite"
-        [(ngModel)]="selectedCourse.favorite"
+        [(ngModel)]="changeCourse.favorite"
       ></mat-checkbox>
     </mat-card-content>
     <mat-card-actions>
