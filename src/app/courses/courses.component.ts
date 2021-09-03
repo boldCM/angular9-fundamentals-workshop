@@ -4,9 +4,11 @@ import { CoursesService } from '../shared/services/courses.service';
 @Component({
   selector: 'app-courses',
   templateUrl: './courses.component.html',
-  styleUrls: ['./courses.component.scss']
+  styleUrls: ['./courses.component.scss'],
 })
 export class CoursesComponent implements OnInit {
+  // @Output() selected;
+
   // CHALLENGE
   // STEP 01: Complete remote update call
   // STEP 02: Complete remote delete call
@@ -16,7 +18,7 @@ export class CoursesComponent implements OnInit {
 
   courses = null;
 
-  constructor(private coursesService: CoursesService) { }
+  constructor(private coursesService: CoursesService) {}
 
   ngOnInit(): void {
     this.resetSelectedCourse();
@@ -29,7 +31,7 @@ export class CoursesComponent implements OnInit {
       title: '',
       description: '',
       percentComplete: 0,
-      favorite: false
+      favorite: false,
     };
 
     this.selectedCourse = emptyCourse;
@@ -40,8 +42,7 @@ export class CoursesComponent implements OnInit {
   }
 
   loadCourses() {
-    this.coursesService.all()
-      .subscribe(courses => this.courses = courses);
+    this.coursesService.all().subscribe((courses) => (this.courses = courses));
   }
 
   refreshCourses() {
@@ -50,18 +51,21 @@ export class CoursesComponent implements OnInit {
   }
 
   saveCourse(course) {
-    if(course.id) {
-      this.coursesService.update(course)
-        .subscribe(result => this.refreshCourses());
+    if (course.id) {
+      this.coursesService
+        .update(course)
+        .subscribe((result) => this.refreshCourses());
     } else {
-      this.coursesService.create(course)
-        .subscribe(result => this.refreshCourses());
+      this.coursesService
+        .create(course)
+        .subscribe((result) => this.refreshCourses());
     }
   }
 
   deleteCourse(courseId) {
-    this.coursesService.delete(courseId)
-      .subscribe(result => this.refreshCourses());
+    this.coursesService
+      .delete(courseId)
+      .subscribe((result) => this.refreshCourses());
   }
 
   cancel() {
